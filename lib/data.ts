@@ -204,7 +204,7 @@ export const days: DayPlan[] = [
     dayLabel: "Alice 1",
     kind: "alice",
     title: "Fly in and meet in Alice",
-    from: "Perth / Queensland",
+    from: "Perth / Brisbane",
     to: "Alice Springs",
     km: 0,
     hours: "Travel day",
@@ -215,7 +215,7 @@ export const days: DayPlan[] = [
     food: "Buy remaining trail food at Coles, Woolworths, or IGA. Lone Dingo for last-minute gear.",
     highlights: [
       "Salvatore lands from Perth (PER → ASP). Typical options: Airnorth direct (~2h 40m on some weekdays) or Qantas via Adelaide (about 5–7 hours).",
-      "James lands from Queensland. Brisbane has Qantas and Virgin nonstop flights (~3h 15m). Other QLD cities usually connect via Brisbane or Adelaide.",
+      "James lands from Brisbane. Qantas and Virgin both fly BNE–ASP nonstop in about 3 hours 15 minutes.",
       "Airport is 15 km from town. Use the airport shuttle or a taxi to the same accommodation.",
     ],
     notes: [
@@ -721,7 +721,7 @@ export const days: DayPlan[] = [
     notes: [
       "Book an afternoon pickup, not a morning one. You will not be down before late morning.",
       "LTTS and Larapinta Express both run Redbank transfers. Duo E2E packages in 2026 were about $690 for two people including three food drops and the transfer — confirm 2027 pricing.",
-      "Celebrate in Alice. Do not book a same-night flight to Perth or Queensland.",
+      "Celebrate in Alice. Do not book a same-night flight to Perth or Brisbane.",
     ],
     waypointId: "sonder",
   },
@@ -731,7 +731,7 @@ export const days: DayPlan[] = [
     kind: "depart",
     title: "Fly home",
     from: "Alice Springs",
-    to: "Perth / Queensland",
+    to: "Perth / Brisbane",
     km: 0,
     hours: "Travel day",
     section: "—",
@@ -742,7 +742,7 @@ export const days: DayPlan[] = [
     highlights: [
       "Return the storeroom key and collect the $50 deposit.",
       "Salvatore: ASP → PER (Airnorth direct or Qantas via Adelaide).",
-      "James: ASP → Queensland (Brisbane nonstop is the cleanest).",
+      "James: ASP → Brisbane nonstop on Qantas or Virgin.",
     ],
     notes: [
       "Keep this as a full buffer day. Afternoon flights are safer after a 20-day walk.",
@@ -815,12 +815,12 @@ export const flights = {
   },
   james: {
     name: "James",
-    from: "Queensland (BNE if he can)",
+    from: "Brisbane (BNE)",
     to: "Alice Springs (ASP)",
     options: [
-      "Brisbane has Qantas and Virgin nonstop flights, about 3 hours 15 minutes. That is the cleanest QLD option.",
-      "Cairns, Gold Coast, Townsville and regional QLD usually connect through Brisbane or Adelaide.",
-      "Aim to land the same afternoon as Salvatore so you share the logistics day.",
+      "Book Brisbane to Alice Springs nonstop. Qantas and Virgin both fly BNE–ASP in about 3 hours 15 minutes.",
+      "Typical recent pattern: Qantas a few days a week (often including Wednesday, Saturday, Sunday) and Virgin on selected days. Confirm the 2027 timetable when it is published.",
+      "Aim to land the same afternoon as Salvatore so you share the Alice logistics day.",
     ],
   },
 };

@@ -2,7 +2,7 @@
 
 Mobile web app for an east-to-west Larapinta Trail walk in April–May 2027.
 
-Walkers: Salvatore Prestianni (Perth) and James Saville (Queensland).
+Walkers: Salvatore Prestianni (Perth) and James Saville (Brisbane).
 
 ## What is in the app
 

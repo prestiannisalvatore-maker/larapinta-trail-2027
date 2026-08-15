@@ -17,7 +17,7 @@ export default function HomePage() {
           <span className="pill">{trip.season}</span>
           <span className="pill">{trip.direction}</span>
           <span className="pill">Commercial food drops</span>
-          <span className="pill">Perth + Queensland → Alice</span>
+          <span className="pill">Perth + Brisbane → Alice</span>
         </div>
         <div className="grid">
           <div className="stat">
@@ -57,7 +57,7 @@ export default function HomePage() {
           experienced walkers in April–May 2027.
         </p>
         <p className="small">
-          Salvatore flies Perth to Alice Springs. James flies from Queensland. You meet in Alice,
+          Salvatore flies Perth to Alice Springs. James flies Brisbane to Alice Springs. You meet in Alice,
           pack commercial food drops, walk from the Telegraph Station to Mt Sonder, and take a
           transfer from Redbank Gorge back to town.
         </p>
