@@ -836,7 +836,7 @@ export const budget = {
           pairLow: 570,
           pairMid: 750,
           pairHigh: 970,
-          note: "This is the only cost James pays. Book BNE–ASP nonstop. April can be pricier than shoulder months — buy when 2027 seats open.",
+          note: "James just needs to get to Alice Springs. Book BNE–ASP nonstop. April can be pricier than shoulder months — buy when 2027 seats open.",
           payer: "james",
         },
       ],

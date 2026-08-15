@@ -16,11 +16,6 @@ function groupSum(lines: CostLine[]) {
 function LineCard({ line }: { line: CostLine }) {
   return (
     <article className="card">
-      <div className="pills" style={{ marginBottom: 8 }}>
-        <span className={`grade ${line.payer === "james" ? "rest" : "grade-4"}`}>
-          {line.payer === "james" ? "James pays" : "Salvatore pays"}
-        </span>
-      </div>
       <strong>{line.item}</strong>
       <div className="meta">{line.each}</div>
       <p style={{ margin: "10px 0 0" }}>
@@ -43,51 +38,48 @@ export default function CostsPage() {
 
   return (
     <main className="wrap">
-      <p className="kicker">Split · James flights only · AUD</p>
+      <p className="kicker">April–May 2027 · AUD</p>
       <h1 className="section-title" style={{ marginTop: 8 }}>
-        Who pays what
+        Costs
       </h1>
       <p className="small">{budget.asOf}</p>
 
-      <div className="grid">
-        <div className="stat">
-          <b>{money(budget.split.james.mid)}</b>
-          <span>James · likely flight cost</span>
-        </div>
-        <div className="stat">
-          <b>{money(budget.split.james.low)}–{money(budget.split.james.high)}</b>
-          <span>James · flight range</span>
-        </div>
-        <div className="stat">
-          <b>{money(budget.split.salvatore.mid)}</b>
-          <span>Salvatore · likely total</span>
-        </div>
-        <div className="stat">
-          <b>{money(budget.midTotal)}</b>
-          <span>Whole trip, mid case</span>
-        </div>
-      </div>
-
-      <h2 className="section-title">James Saville</h2>
       <article className="card">
+        <h2 style={{ margin: "0 0 6px" }}>James Saville</h2>
+        <p style={{ margin: 0 }}>
+          <strong>{money(budget.split.james.mid)}</strong>
+          <span className="meta">
+            {" "}
+            likely · {money(budget.split.james.low)}–{money(budget.split.james.high)}
+          </span>
+        </p>
         <p className="small">
-          James pays his <strong>Brisbane ⇄ Alice Springs return flight only</strong>. Nothing else
-          on this trip is on him: not Parks fees, camps, food, drops, the Redbank transfer, or Alice
-          beds.
+          James just needs to get to Alice Springs. His Brisbane ⇄ Alice return flight is the only
+          amount against his name.
         </p>
       </article>
+
+      <article className="card">
+        <h2 style={{ margin: "0 0 6px" }}>Salvatore Prestianni</h2>
+        <p style={{ margin: 0 }}>
+          <strong>{money(budget.split.salvatore.mid)}</strong>
+          <span className="meta">
+            {" "}
+            likely · {money(budget.split.salvatore.low)}–{money(budget.split.salvatore.high)}
+          </span>
+        </p>
+        <p className="small">
+          Perth flights, Alice beds, Parks fees, camps, food drops, the Redbank transfer, and food
+          for both walkers.
+        </p>
+      </article>
+
+      <h2 className="section-title">James Saville</h2>
       {jamesLines.map((line) => (
         <LineCard key={line.item} line={line} />
       ))}
 
       <h2 className="section-title">Salvatore Prestianni</h2>
-      <article className="card">
-        <p className="small">
-          You cover your Perth flights and every shared cost for both walkers. Mid case about{" "}
-          {money(budget.split.salvatore.mid)} ({money(budget.split.salvatore.low)}–
-          {money(budget.split.salvatore.high)}).
-        </p>
-      </article>
       {salvatoreGroups.map((group) => {
         const totals = groupSum(group.lines);
         return (
@@ -106,7 +98,7 @@ export default function CostsPage() {
         );
       })}
 
-      <h2 className="section-title">Not in either total</h2>
+      <h2 className="section-title">Not in these totals</h2>
       <article className="card">
         <ul className="hl">
           {budget.notIncluded.map((item) => (

@@ -9,12 +9,12 @@ export default function LogisticsPage() {
       </h1>
       <article className="card">
         <p className="kicker">Money</p>
-        <h3 style={{ margin: "0 0 8px" }}>James: flights only · you: the rest</h3>
+        <h3 style={{ margin: "0 0 8px" }}>James Saville · ~$750</h3>
         <p className="small">
-          James Saville pays his Brisbane ⇄ Alice return, about $570–$970 (likely ~$750). You take
-          on every other cost, about $4,750 mid case, including your Perth flights, Alice beds,
-          Parks fees, food drops, the Redbank transfer and all trail food. Open the Cost tab for the
-          split.
+          James just needs to get to Alice Springs. Budget $570–$970 for the Brisbane return
+          (likely ~$750). Salvatore Prestianni · ~$4,750 covers Perth flights, Alice beds, Parks
+          fees, food drops, the Redbank transfer and trail food. Open the Cost tab for the line
+          items.
         </p>
       </article>
 

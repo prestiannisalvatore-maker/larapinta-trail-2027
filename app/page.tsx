@@ -34,7 +34,7 @@ export default function HomePage() {
           </div>
           <div className="stat">
             <b>~$750</b>
-            <span>James · BNE flight only</span>
+            <span>James · get to Alice</span>
           </div>
         </div>
       </section>
@@ -59,8 +59,9 @@ export default function HomePage() {
         <p className="small">
           Salvatore flies Perth to Alice Springs. James flies Brisbane to Alice Springs. You meet in Alice,
           pack commercial food drops, walk from the Telegraph Station to Mt Sonder, and take a
-          transfer from Redbank Gorge back to town. James pays his Brisbane flights only, about $570–
-          $970. You cover the rest, about $4,750 in the mid case.
+          transfer from Redbank Gorge back to town. James just needs to get to Alice Springs — about
+          $570–$970 for the Brisbane return. The rest of the trip, about $4,750 mid case, sits with
+          Salvatore.
         </p>
       </article>
 
