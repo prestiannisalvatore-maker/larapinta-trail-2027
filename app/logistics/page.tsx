@@ -9,11 +9,12 @@ export default function LogisticsPage() {
       </h1>
       <article className="card">
         <p className="kicker">Money</p>
-        <h3 style={{ margin: "0 0 8px" }}>About $5,500 for both of you</h3>
+        <h3 style={{ margin: "0 0 8px" }}>James: flights only · you: the rest</h3>
         <p className="small">
-          Mid-case April–May budget in 2026 prices: flights, Alice beds, Parks fees, food drops,
-          Redbank transfer and trail food. Lean is about $4,500. Comfortable is about $6,800. Open
-          the Cost tab for the line-by-line split.
+          James Saville pays his Brisbane ⇄ Alice return, about $570–$970 (likely ~$750). You take
+          on every other cost, about $4,750 mid case, including your Perth flights, Alice beds,
+          Parks fees, food drops, the Redbank transfer and all trail food. Open the Cost tab for the
+          split.
         </p>
       </article>
 

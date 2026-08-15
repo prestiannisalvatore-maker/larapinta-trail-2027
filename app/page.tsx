@@ -33,8 +33,8 @@ export default function HomePage() {
             <span>Sections 4, 5 and 9 — split</span>
           </div>
           <div className="stat">
-            <b>~$2,750</b>
-            <span>Each, mid-case budget</span>
+            <b>~$750</b>
+            <span>James · BNE flight only</span>
           </div>
         </div>
       </section>
@@ -59,8 +59,8 @@ export default function HomePage() {
         <p className="small">
           Salvatore flies Perth to Alice Springs. James flies Brisbane to Alice Springs. You meet in Alice,
           pack commercial food drops, walk from the Telegraph Station to Mt Sonder, and take a
-          transfer from Redbank Gorge back to town. Budget about $5,500 for both of you, or $2,750
-          each, in 2026 prices.
+          transfer from Redbank Gorge back to town. James pays his Brisbane flights only, about $570–
+          $970. You cover the rest, about $4,750 in the mid case.
         </p>
       </article>
 

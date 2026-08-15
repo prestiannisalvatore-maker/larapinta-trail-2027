@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { budget } from "@/lib/data";
+import { budget, type CostLine } from "@/lib/data";
 
 function money(n: number) {
   return `$${n.toLocaleString("en-AU")}`;
 }
 
-function groupSum(lines: { pairLow: number; pairMid: number; pairHigh: number }[]) {
+function groupSum(lines: CostLine[]) {
   return {
     low: lines.reduce((s, l) => s + l.pairLow, 0),
     mid: lines.reduce((s, l) => s + l.pairMid, 0),
@@ -13,76 +13,100 @@ function groupSum(lines: { pairLow: number; pairMid: number; pairHigh: number }[
   };
 }
 
-export default function CostsPage() {
-  const summed = budget.groups.reduce(
-    (acc, group) => {
-      const g = groupSum(group.lines);
-      return { low: acc.low + g.low, mid: acc.mid + g.mid, high: acc.high + g.high };
-    },
-    { low: 0, mid: 0, high: 0 },
+function LineCard({ line }: { line: CostLine }) {
+  return (
+    <article className="card">
+      <div className="pills" style={{ marginBottom: 8 }}>
+        <span className={`grade ${line.payer === "james" ? "rest" : "grade-4"}`}>
+          {line.payer === "james" ? "James pays" : "Salvatore pays"}
+        </span>
+      </div>
+      <strong>{line.item}</strong>
+      <div className="meta">{line.each}</div>
+      <p style={{ margin: "10px 0 0" }}>
+        {money(line.pairLow)}–{money(line.pairHigh)}
+        <span className="meta"> · mid {money(line.pairMid)}</span>
+      </p>
+      <p className="small">{line.note}</p>
+    </article>
   );
+}
+
+export default function CostsPage() {
+  const jamesLines = budget.groups.flatMap((group) => group.lines.filter((line) => line.payer === "james"));
+  const salvatoreGroups = budget.groups
+    .map((group) => ({
+      ...group,
+      lines: group.lines.filter((line) => line.payer === "salvatore"),
+    }))
+    .filter((group) => group.lines.length > 0);
 
   return (
     <main className="wrap">
-      <p className="kicker">Two walkers · AUD · 2026 prices</p>
+      <p className="kicker">Split · James flights only · AUD</p>
       <h1 className="section-title" style={{ marginTop: 8 }}>
-        Trip cost
+        Who pays what
       </h1>
       <p className="small">{budget.asOf}</p>
 
       <div className="grid">
         <div className="stat">
-          <b>{money(budget.lowTotal)}</b>
-          <span>Lean pair total</span>
+          <b>{money(budget.split.james.mid)}</b>
+          <span>James · likely flight cost</span>
+        </div>
+        <div className="stat">
+          <b>{money(budget.split.james.low)}–{money(budget.split.james.high)}</b>
+          <span>James · flight range</span>
+        </div>
+        <div className="stat">
+          <b>{money(budget.split.salvatore.mid)}</b>
+          <span>Salvatore · likely total</span>
         </div>
         <div className="stat">
           <b>{money(budget.midTotal)}</b>
-          <span>Likely pair total</span>
-        </div>
-        <div className="stat">
-          <b>{money(budget.highTotal)}</b>
-          <span>Comfortable pair total</span>
-        </div>
-        <div className="stat">
-          <b>{money(Math.round(budget.midTotal / 2))}</b>
-          <span>About this each, mid case</span>
+          <span>Whole trip, mid case</span>
         </div>
       </div>
 
-      <article className="card" style={{ marginTop: 16 }}>
+      <h2 className="section-title">James Saville</h2>
+      <article className="card">
         <p className="small">
-          The likely number is about {money(budget.midTotal)} for both of you, or{" "}
-          {money(Math.round(budget.midTotal / 2))} each, if you share a room, share three food-drop
-          boxes, and book Airnorth / Virgin rather than the dearest Qantas fares. Line items below
-          add to {money(summed.mid)} in the mid column before you round for 2027 inflation.
+          James pays his <strong>Brisbane ⇄ Alice Springs return flight only</strong>. Nothing else
+          on this trip is on him: not Parks fees, camps, food, drops, the Redbank transfer, or Alice
+          beds.
         </p>
       </article>
+      {jamesLines.map((line) => (
+        <LineCard key={line.item} line={line} />
+      ))}
 
-      {budget.groups.map((group) => {
+      <h2 className="section-title">Salvatore Prestianni</h2>
+      <article className="card">
+        <p className="small">
+          You cover your Perth flights and every shared cost for both walkers. Mid case about{" "}
+          {money(budget.split.salvatore.mid)} ({money(budget.split.salvatore.low)}–
+          {money(budget.split.salvatore.high)}).
+        </p>
+      </article>
+      {salvatoreGroups.map((group) => {
         const totals = groupSum(group.lines);
         return (
           <section key={group.name}>
-            <h2 className="section-title">{group.name}</h2>
+            <h3 className="section-title" style={{ fontSize: 22 }}>
+              {group.name}
+            </h3>
             {group.lines.map((line) => (
-              <article className="card" key={line.item}>
-                <strong>{line.item}</strong>
-                <div className="meta">{line.each}</div>
-                <p style={{ margin: "10px 0 0" }}>
-                  Pair: {money(line.pairLow)}–{money(line.pairHigh)}
-                  <span className="meta"> · mid {money(line.pairMid)}</span>
-                </p>
-                <p className="small">{line.note}</p>
-              </article>
+              <LineCard key={line.item} line={line} />
             ))}
             <p className="small">
-              {group.name} mid subtotal {money(totals.mid)} for two (
+              {group.name} mid subtotal {money(totals.mid)} (
               {money(totals.low)}–{money(totals.high)}).
             </p>
           </section>
         );
       })}
 
-      <h2 className="section-title">Not in the total</h2>
+      <h2 className="section-title">Not in either total</h2>
       <article className="card">
         <ul className="hl">
           {budget.notIncluded.map((item) => (

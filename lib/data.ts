@@ -780,6 +780,8 @@ export const fees = [
   { item: "Food-storeroom key", each: "$50 deposit + $10 fee", note: "Tourism Central Australia, Todd Mall. Deposit back when the key is returned." },
 ];
 
+export type CostPayer = "james" | "salvatore";
+
 export type CostLine = {
   item: string;
   each: string;
@@ -787,6 +789,7 @@ export type CostLine = {
   pairMid: number;
   pairHigh: number;
   note: string;
+  payer: CostPayer;
 };
 
 export const budget = {
@@ -798,6 +801,22 @@ export const budget = {
   lowTotal: 4500,
   midTotal: 5500,
   highTotal: 6800,
+  split: {
+    james: {
+      name: "James Saville",
+      pays: "Brisbane ⇄ Alice Springs return flight only",
+      low: 570,
+      mid: 750,
+      high: 970,
+    },
+    salvatore: {
+      name: "Salvatore Prestianni",
+      pays: "His Perth flights plus every other trip cost for both walkers",
+      low: 3930,
+      mid: 4750,
+      high: 5830,
+    },
+  },
   groups: [
     {
       name: "Flights",
@@ -809,14 +828,16 @@ export const budget = {
           pairMid: 1000,
           pairHigh: 1330,
           note: "Direct Airnorth is the cheap/fast option (~2h 40m). Qantas via Adelaide is the reliable backup.",
+          payer: "salvatore",
         },
         {
-          item: "James · Brisbane ⇄ Alice return",
+          item: "James Saville · Brisbane ⇄ Alice return",
           each: "Virgin from ~$570–$600 return; Qantas often $730–$970",
           pairLow: 570,
           pairMid: 750,
           pairHigh: 970,
-          note: "Book BNE–ASP nonstop. April can be pricier than shoulder months — buy when 2027 seats open.",
+          note: "This is the only cost James pays. Book BNE–ASP nonstop. April can be pricier than shoulder months — buy when 2027 seats open.",
+          payer: "james",
         },
       ],
     },
@@ -830,6 +851,7 @@ export const budget = {
           pairMid: 540,
           pairHigh: 660,
           note: "Two nights before Day 1, one night after Mt Sonder. Share a room. Peak July is dearer than April–May.",
+          payer: "salvatore",
         },
         {
           item: "Airport shuttle · both of you, in and out",
@@ -838,6 +860,7 @@ export const budget = {
           pairMid: 88,
           pairHigh: 88,
           note: "Official Alice Springs Airport shuttle. Book ahead. Taxi from the airport is more.",
+          payer: "salvatore",
         },
         {
           item: "Taxi town → Telegraph Station",
@@ -846,6 +869,7 @@ export const budget = {
           pairMid: 25,
           pairHigh: 40,
           note: "One taxi for both of you on Day 1. Or walk ~3 km along the Todd and pay nothing.",
+          payer: "salvatore",
         },
         {
           item: "Town meals in Alice",
@@ -854,6 +878,7 @@ export const budget = {
           pairMid: 300,
           pairHigh: 400,
           note: "Cover arrival night, the logistics day, and the celebration dinner after Sonder.",
+          payer: "salvatore",
         },
       ],
     },
@@ -867,6 +892,7 @@ export const budget = {
           pairMid: 90,
           pairHigh: 90,
           note: "Official interstate visitor pass. A 2-week pass is $30 if your dates fit.",
+          payer: "salvatore",
         },
         {
           item: "Larapinta walking-trail fee × 2",
@@ -875,6 +901,7 @@ export const budget = {
           pairMid: 250,
           pairHigh: 250,
           note: "Official multi-day walk fee. Same price for 6 nights or 20.",
+          payer: "salvatore",
         },
         {
           item: "Category B trail camps · 15 nights × 2",
@@ -883,6 +910,7 @@ export const budget = {
           pairMid: 300,
           pairHigh: 300,
           note: "Wallaby through Jay, Brinkley through Waterfall Gorge, then Finke, Rocky Bar and Redbank.",
+          payer: "salvatore",
         },
         {
           item: "Ormiston Gorge · 2 nights × 2",
@@ -891,6 +919,7 @@ export const budget = {
           pairMid: 80,
           pairHigh: 80,
           note: "Arrive Day 15, rest Day 16.",
+          payer: "salvatore",
         },
         {
           item: "Standley Chasm unpowered · 2 nights × 2",
@@ -899,6 +928,7 @@ export const budget = {
           pairMid: 84,
           pairHigh: 84,
           note: "Private camp. Entry to the chasm is included. Showers and a cafe.",
+          payer: "salvatore",
         },
       ],
     },
@@ -912,6 +942,7 @@ export const budget = {
           pairMid: 270,
           pairHigh: 540,
           note: "Standley, Ellery Creek South, Ormiston. One 55 L box per drop is enough if you pack dense dehydrated food. Budget six boxes if you want more variety. Includes container hire and hotel delivery. Standley’s $5 box fee is in the Express price.",
+          payer: "salvatore",
         },
         {
           item: "Parks storeroom key",
@@ -920,6 +951,7 @@ export const budget = {
           pairMid: 10,
           pairHigh: 10,
           note: "Needed for Ellery and Ormiston. Deposit is not in the trip total once you return the key.",
+          payer: "salvatore",
         },
         {
           item: "Redbank Gorge → Alice transfer · 2 walkers",
@@ -928,6 +960,7 @@ export const budget = {
           pairMid: 440,
           pairHigh: 500,
           note: "Afternoon pickup on Day 20. Larapinta Express lists Redbank from about $190. Other NT Parks-listed operators have been $250/adult or about $380 for two. LTTS paused general 2026 support — book Express, Emu Run or similar for 2027.",
+          payer: "salvatore",
         },
       ],
     },
@@ -941,6 +974,7 @@ export const budget = {
           pairMid: 880,
           pairHigh: 1120,
           note: "Buy in Perth/Brisbane or Alice (Coles, Woolworths, Lone Dingo). Aim 2,800–3,500 kcal/day. Back Country / Radix / supermarket instant meals all work.",
+          payer: "salvatore",
         },
         {
           item: "Stove fuel and extras",
@@ -949,6 +983,7 @@ export const budget = {
           pairMid: 60,
           pairHigh: 80,
           note: "No fires on the trail. Share canisters.",
+          payer: "salvatore",
         },
         {
           item: "Standley and Ormiston cafe meals",
@@ -957,6 +992,7 @@ export const budget = {
           pairMid: 80,
           pairHigh: 120,
           note: "Optional. Nice on the two rest days. Confirm kiosk hours.",
+          payer: "salvatore",
         },
       ],
     },
