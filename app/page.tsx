@@ -10,11 +10,11 @@ export default function HomePage() {
         <p className="kicker">Tjoritja / West MacDonnell · Arrernte Country</p>
         <h1>Larapinta Trail 2027</h1>
         <p className="lede">
-          East-to-west end-to-end for {trip.walkers[0]} and {trip.walkers[1]}. Twenty days on the
-          spine of the range, two rest days, then Mt Sonder at sunrise.
+          East-to-west end-to-end for {trip.walkers[0]} and {trip.walkers[1]}. Arrive Alice Saturday
+          10 April. Walk starts Monday 12 April 2027. Mt Sonder sunrise Saturday 1 May.
         </p>
         <div className="pills">
-          <span className="pill">{trip.season}</span>
+          <span className="pill">Mon 12 Apr 2027 start</span>
           <span className="pill">{trip.direction}</span>
           <span className="pill">Commercial food drops</span>
           <span className="pill">Perth + Brisbane → Alice</span>

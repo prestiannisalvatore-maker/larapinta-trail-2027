@@ -34,6 +34,9 @@ export const trip = {
   walkers: ["Salvatore Prestianni", "James Saville"],
   direction: "East to west",
   season: "April–May 2027",
+  walkStart: "Monday 12 April 2027",
+  arriveAlice: "Saturday 10 April 2027",
+  departAlice: "Sunday 2 May 2027",
   start: "Alice Springs Telegraph Station",
   finish: "Mt Sonder, then Redbank Gorge",
   trailKm: 231,
@@ -221,7 +224,7 @@ export const days: DayPlan[] = [
     notes: [
       "Book flights to arrive on the same afternoon if you can. Keep a later backup in case of missed connections.",
       "2027 domestic schedules are not published yet. Search from about August–October 2026, when airlines usually release the April–May 2027 timetable.",
-      "Leave a spare day in Alice before the walk. Do not plan to start walking the same day you fly in.",
+      "Arrive Saturday 10 April 2027 so you have Sunday for packing. The walk starts Monday 12 April.",
     ],
     waypointId: "alice",
   },

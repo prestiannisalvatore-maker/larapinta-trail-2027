@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import GradeBadge from "@/components/GradeBadge";
 import { days, getDay, getWaypoint } from "@/lib/data";
+import { dateForDay, formatLongDate } from "@/lib/dates";
 
 export function generateStaticParams() {
   return days.map((day) => ({ day: day.id }));
@@ -23,7 +24,7 @@ export default async function DayPage({ params }: { params: Promise<{ day: strin
         ← All days
       </Link>
       <p className="kicker">
-        {day.dayLabel}
+        {formatLongDate(dateForDay(day))} · {day.dayLabel}
         {day.section !== "—" ? ` · Section ${day.section}` : ""}
       </p>
       <h1 className="section-title" style={{ marginTop: 6 }}>
@@ -33,7 +34,7 @@ export default async function DayPage({ params }: { params: Promise<{ day: strin
         <GradeBadge grade={day.grade} kind={day.kind} />
         {day.km > 0 ? <span className="pill">{day.km} km</span> : null}
         <span className="pill">{day.hours}</span>
-        <span className="pill">{day.camp}</span>
+        <span className="pill">Sleep: {day.camp}</span>
       </div>
 
       <article className="card">

@@ -159,9 +159,10 @@ h3,
 .day-num small {
   display: block;
   color: var(--ochre-2);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-transform: none;
 }
 
 .day-num b {
@@ -281,6 +282,7 @@ h3,
 }
 
 .map-shell {
+  position: relative;
   height: calc(100dvh - 88px);
   width: 100%;
 }
@@ -341,4 +343,76 @@ h3,
   font-size: 13px;
   display: inline-block;
   margin-bottom: 12px;
+}
+
+.map-tools {
+  position: absolute;
+  z-index: 500;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.camp-marker {
+  background: none;
+  border: 0;
+}
+
+.camp-pin {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.55));
+}
+
+.camp-pin-dot {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #d46a2c;
+  color: #1a0c08;
+  font-weight: 800;
+  font-size: 11px;
+  border: 2px solid #f6ead4;
+}
+
+.camp-pin-rest .camp-pin-dot,
+.camp-pin-alice .camp-pin-dot {
+  background: #7ea08a;
+}
+
+.camp-pin-summit .camp-pin-dot,
+.camp-pin-start .camp-pin-dot {
+  background: #f0a05a;
+}
+
+.camp-pin-label {
+  background: #f6ead4;
+  color: #1a0c08;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 4px 7px;
+  border-radius: 8px;
+  max-width: 140px;
+}
+
+.you-pin {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #3d8bfd;
+  border: 3px solid #f6ead4;
+  box-shadow: 0 0 0 6px rgba(61, 139, 253, 0.35);
+}
+
+.leaflet-popup-content {
+  color: #1a0c08;
+  font-size: 13px;
 }
