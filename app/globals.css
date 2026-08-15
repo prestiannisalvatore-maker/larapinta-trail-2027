@@ -217,7 +217,7 @@ h3,
   border-top: 1px solid #3d2618;
   padding: 8px 10px calc(10px + env(safe-area-inset-bottom));
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .nav a {

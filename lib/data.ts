@@ -774,12 +774,202 @@ export const waterPoints = [
 export const fees = [
   { item: "NT Parks Visitor Pass — 1 month", each: "$45", note: "Required for interstate visitors. 2-week pass is $30 if your Alice buffers fit. NT residents are exempt." },
   { item: "Larapinta walking-trail fee", each: "$125", note: "Capped at $125 for 6+ consecutive days. Separate from camping." },
-  { item: "Category B camps (most trail camps)", each: "$10 / night", note: "About 17 nights if you use Parks camps for every walking night except Standley and Ormiston rest." },
-  { item: "Ormiston Gorge camp", each: "$20 / night", note: "Category C. Book the rest night here." },
-  { item: "Standley Chasm entry + camp", each: "Private fees", note: "Pay Angkerle / Standley Chasm directly. Not in the Parks booking system." },
-  { item: "Food-storeroom key", each: "$50 deposit + $10 fee", note: "Often included in a commercial E2E package." },
-  { item: "LTTS E2E Duo Express (2026 guide)", each: "~$690 for two", note: "Redbank transfer + 3 food drops + key. Confirm 2027 price." },
+  { item: "Category B camps (most trail camps)", each: "$10 / night", note: "15 Parks nights in this itinerary, not counting Standley or Ormiston." },
+  { item: "Ormiston Gorge camp", each: "$20 / night", note: "Category C. Two nights: arrive Day 15 and rest Day 16." },
+  { item: "Standley Chasm unpowered camp", each: "$25.50 then $16.50", note: "Per person. First night $25.50, extra night $16.50. Entry is included. Book standleychasm.com.au." },
+  { item: "Food-storeroom key", each: "$50 deposit + $10 fee", note: "Tourism Central Australia, Todd Mall. Deposit back when the key is returned." },
 ];
+
+export type CostLine = {
+  item: string;
+  each: string;
+  pairLow: number;
+  pairMid: number;
+  pairHigh: number;
+  note: string;
+};
+
+export const budget = {
+  currency: "AUD",
+  asOf: "August 2026 advertised prices, planned for April–May 2027. Flights and hotels move; Parks fees are official 2026 rates.",
+  party: 2,
+  nightsAlice: 3,
+  trailFoodDays: 20,
+  lowTotal: 4500,
+  midTotal: 5500,
+  highTotal: 6800,
+  groups: [
+    {
+      name: "Flights",
+      lines: [
+        {
+          item: "Salvatore · Perth ⇄ Alice return",
+          each: "Airnorth from ~$775 return; Qantas via Adelaide often $970–$1,330",
+          pairLow: 775,
+          pairMid: 1000,
+          pairHigh: 1330,
+          note: "Direct Airnorth is the cheap/fast option (~2h 40m). Qantas via Adelaide is the reliable backup.",
+        },
+        {
+          item: "James · Brisbane ⇄ Alice return",
+          each: "Virgin from ~$570–$600 return; Qantas often $730–$970",
+          pairLow: 570,
+          pairMid: 750,
+          pairHigh: 970,
+          note: "Book BNE–ASP nonstop. April can be pricier than shoulder months — buy when 2027 seats open.",
+        },
+      ],
+    },
+    {
+      name: "Alice Springs beds and town",
+      lines: [
+        {
+          item: "Hotel / motel · 3 nights, one double room",
+          each: "Midrange room about $150–$220 a night",
+          pairLow: 450,
+          pairMid: 540,
+          pairHigh: 660,
+          note: "Two nights before Day 1, one night after Mt Sonder. Share a room. Peak July is dearer than April–May.",
+        },
+        {
+          item: "Airport shuttle · both of you, in and out",
+          each: "$23 one way or $44 return per adult (valid 1 Apr 2026–31 Mar 2027)",
+          pairLow: 88,
+          pairMid: 88,
+          pairHigh: 88,
+          note: "Official Alice Springs Airport shuttle. Book ahead. Taxi from the airport is more.",
+        },
+        {
+          item: "Taxi town → Telegraph Station",
+          each: "About $20–$25 for the car",
+          pairLow: 20,
+          pairMid: 25,
+          pairHigh: 40,
+          note: "One taxi for both of you on Day 1. Or walk ~3 km along the Todd and pay nothing.",
+        },
+        {
+          item: "Town meals in Alice",
+          each: "Cheap plate ~$20; mid-range dinner for two ~$60–$120",
+          pairLow: 220,
+          pairMid: 300,
+          pairHigh: 400,
+          note: "Cover arrival night, the logistics day, and the celebration dinner after Sonder.",
+        },
+      ],
+    },
+    {
+      name: "Parks, camping and Standley",
+      lines: [
+        {
+          item: "NT Parks Visitor Pass · 1 month × 2",
+          each: "$45 each",
+          pairLow: 90,
+          pairMid: 90,
+          pairHigh: 90,
+          note: "Official interstate visitor pass. A 2-week pass is $30 if your dates fit.",
+        },
+        {
+          item: "Larapinta walking-trail fee × 2",
+          each: "$125 each (capped)",
+          pairLow: 250,
+          pairMid: 250,
+          pairHigh: 250,
+          note: "Official multi-day walk fee. Same price for 6 nights or 20.",
+        },
+        {
+          item: "Category B trail camps · 15 nights × 2",
+          each: "$10 per adult per night",
+          pairLow: 300,
+          pairMid: 300,
+          pairHigh: 300,
+          note: "Wallaby through Jay, Brinkley through Waterfall Gorge, then Finke, Rocky Bar and Redbank.",
+        },
+        {
+          item: "Ormiston Gorge · 2 nights × 2",
+          each: "$20 per adult per night (Category C)",
+          pairLow: 80,
+          pairMid: 80,
+          pairHigh: 80,
+          note: "Arrive Day 15, rest Day 16.",
+        },
+        {
+          item: "Standley Chasm unpowered · 2 nights × 2",
+          each: "$25.50 first night, $16.50 second, per person",
+          pairLow: 84,
+          pairMid: 84,
+          pairHigh: 84,
+          note: "Private camp. Entry to the chasm is included. Showers and a cafe.",
+        },
+      ],
+    },
+    {
+      name: "Transfers and food-drop service",
+      lines: [
+        {
+          item: "3 commercial food-drop containers",
+          each: "Larapinta Express 55 L drop from $90 each",
+          pairLow: 270,
+          pairMid: 270,
+          pairHigh: 540,
+          note: "Standley, Ellery Creek South, Ormiston. One 55 L box per drop is enough if you pack dense dehydrated food. Budget six boxes if you want more variety. Includes container hire and hotel delivery. Standley’s $5 box fee is in the Express price.",
+        },
+        {
+          item: "Parks storeroom key",
+          each: "$10 fee + $50 refundable deposit",
+          pairLow: 10,
+          pairMid: 10,
+          pairHigh: 10,
+          note: "Needed for Ellery and Ormiston. Deposit is not in the trip total once you return the key.",
+        },
+        {
+          item: "Redbank Gorge → Alice transfer · 2 walkers",
+          each: "About $190–$250 a seat, or ~$380–$500 for two",
+          pairLow: 380,
+          pairMid: 440,
+          pairHigh: 500,
+          note: "Afternoon pickup on Day 20. Larapinta Express lists Redbank from about $190. Other NT Parks-listed operators have been $250/adult or about $380 for two. LTTS paused general 2026 support — book Express, Emu Run or similar for 2027.",
+        },
+      ],
+    },
+    {
+      name: "Food on the trail",
+      lines: [
+        {
+          item: "Dehydrated dinners, breakfasts, snacks · 20 days × 2",
+          each: "About $18–$28 per person per day",
+          pairLow: 720,
+          pairMid: 880,
+          pairHigh: 1120,
+          note: "Buy in Perth/Brisbane or Alice (Coles, Woolworths, Lone Dingo). Aim 2,800–3,500 kcal/day. Back Country / Radix / supermarket instant meals all work.",
+        },
+        {
+          item: "Stove fuel and extras",
+          each: "3–4 gas canisters plus electrolytes",
+          pairLow: 50,
+          pairMid: 60,
+          pairHigh: 80,
+          note: "No fires on the trail. Share canisters.",
+        },
+        {
+          item: "Standley and Ormiston cafe meals",
+          each: "Cooked meal about $20–$40",
+          pairLow: 40,
+          pairMid: 80,
+          pairHigh: 120,
+          note: "Optional. Nice on the two rest days. Confirm kiosk hours.",
+        },
+      ],
+    },
+  ] as { name: string; lines: CostLine[] }[],
+  notIncluded: [
+    "Gear you already own (packs, tent, bags, PLB). Buying a full kit from scratch is another $800–$2,000 each.",
+    "Travel insurance and ambulance / evacuation cover — get this. Remote rescue is expensive.",
+    "PLB hire if you do not own one, about $50–$80.",
+    "Luggage storage in Alice, about $75 a bag with some transfer companies.",
+    "Uluru or extra sightseeing after the walk.",
+    "2027 price rises. Parks fees, flights and transfer rates can change.",
+  ],
+};
 
 export const foodDrops = [
   {
@@ -828,15 +1018,15 @@ export const flights = {
 export const transfers = [
   {
     name: "Start — Telegraph Station",
-    detail: "Taxi or walk about 3 km from town along the Todd. Larapinta Express does not drop at the eastern trailhead.",
+    detail: "Taxi about $20–$25 for both of you, or walk about 3 km from town along the Todd. Commercial operators generally do not drop at the eastern trailhead.",
   },
   {
     name: "Finish — Redbank Gorge to Alice",
-    detail: "Book a commercial afternoon pickup on Day 20. LTTS, Larapinta Express, Emu Run, Outback Elite Tours and Outback Tour Services are listed by NT Parks.",
+    detail: "Book a commercial afternoon pickup on Day 20. Budget $380–$500 for two. Larapinta Express, Emu Run, Outback Elite Tours and Outback Tour Services are listed by NT Parks.",
   },
   {
-    name: "Recommended package",
-    detail: "LTTS E2E Duo Express: Redbank transfer, three 50 L food drops (Standley, Ellery South, Ormiston), container delivery to your Alice accommodation, and storeroom key. 2026 duo price was about $690 total.",
+    name: "Recommended 2027 support",
+    detail: "Larapinta Express: 55 L food drops from $90 each (book three) plus the Redbank transfer. They deliver empty boxes to your Alice room. LTTS said it would not offer general transfers and drops in 2026 — do not count on that package for 2027 until they say otherwise.",
   },
 ];
 
@@ -881,6 +1071,9 @@ export const sources = [
   { label: "NT Parks Visitor Pass", href: "https://nt.gov.au/parks/visitor-pass" },
   { label: "Park bookings", href: "https://parkbookings.nt.gov.au" },
   { label: "Trail GPS (OpenStreetMap relation 3066363)", href: "https://www.openstreetmap.org/relation/3066363" },
+  { label: "Larapinta Express food drops", href: "https://larapintaexpress.rezdy.com/600156/food-container-drop" },
+  { label: "Standley Chasm camping", href: "https://standleychasm.rezdy.com/462165/unpowered-camping" },
+  { label: "Alice Springs Airport shuttle", href: "https://www.alicespringsairport.com.au/traveller/parking-transport/transport-options" },
 ];
 
 export function getDay(id: string) {

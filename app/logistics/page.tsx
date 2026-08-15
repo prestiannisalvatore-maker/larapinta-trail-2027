@@ -7,6 +7,15 @@ export default function LogisticsPage() {
       <h1 className="section-title" style={{ marginTop: 8 }}>
         Logistics
       </h1>
+      <article className="card">
+        <p className="kicker">Money</p>
+        <h3 style={{ margin: "0 0 8px" }}>About $5,500 for both of you</h3>
+        <p className="small">
+          Mid-case April–May budget in 2026 prices: flights, Alice beds, Parks fees, food drops,
+          Redbank transfer and trail food. Lean is about $4,500. Comfortable is about $6,800. Open
+          the Cost tab for the line-by-line split.
+        </p>
+      </article>
 
       <h2 className="section-title">Flights</h2>
       <article className="card">

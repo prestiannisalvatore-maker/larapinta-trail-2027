@@ -7,6 +7,7 @@ const items = [
   { href: "/", label: "Home", icon: HomeIcon },
   { href: "/itinerary", label: "Days", icon: DaysIcon },
   { href: "/map", label: "Map", icon: MapIcon },
+  { href: "/costs", label: "Cost", icon: CostIcon },
   { href: "/gear", label: "Gear", icon: GearIcon },
   { href: "/logistics", label: "Plan", icon: PlanIcon },
 ];
@@ -60,6 +61,15 @@ function GearIcon() {
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
       <path d="M9 6h11M9 12h11M9 18h11" />
       <path d="M5 6h.01M5 12h.01M5 18h.01" />
+    </svg>
+  );
+}
+
+function CostIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <circle cx="12" cy="12" r="8" />
+      <path d="M12 7v10M9.5 9.5c.6-1 2.6-1.2 3.4 0s-.2 2.3-1.9 2.5c-1.7.2-2.3 1.6-1.6 2.5.8 1 2.8.9 3.6-.2" />
     </svg>
   );
 }
