@@ -1,0 +1,9 @@
+{
+  "name": "Larapinta Trail 2027",
+  "short_name": "Larapinta",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#140c08",
+  "theme_color": "#140c08",
+  "description": "East-to-west Larapinta itinerary, GPS map and logistics for Salvatore and James."
+}
