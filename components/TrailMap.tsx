@@ -6,6 +6,13 @@ import type { GeoJsonObject } from "geojson";
 import L from "leaflet";
 import { getWaypoint } from "@/lib/data";
 import { dateForDay, formatShortDate, overnightPins } from "@/lib/dates";
+import {
+  isOfflineReady,
+  prepareOfflineTiles,
+  readOfflineStatus,
+  type OfflineStatus,
+  type PrepareProgress,
+} from "@/lib/offline-tiles";
 import "leaflet/dist/leaflet.css";
 
 function campIcon(label: string, name: string, kind: string) {
@@ -46,12 +53,11 @@ function LocateUser({ enabled }: { enabled: boolean }) {
       return;
     }
 
-    map.locate({ watch: true, enableHighAccuracy: true, setView: false, maxZoom: 14 });
+    map.locate({ watch: true, enableHighAccuracy: true, setView: false, maxZoom: 12 });
 
     function onFound(event: L.LocationEvent) {
-      const next: [number, number] = [event.latlng.lat, event.latlng.lng];
-      setPosition(next);
-      map.setView(event.latlng, Math.max(map.getZoom(), 13));
+      setPosition([event.latlng.lat, event.latlng.lng]);
+      map.setView(event.latlng, Math.max(map.getZoom(), 12));
     }
 
     map.on("locationfound", onFound);
@@ -64,7 +70,7 @@ function LocateUser({ enabled }: { enabled: boolean }) {
   if (!position) return null;
   return (
     <Marker position={position} icon={userIcon()} zIndexOffset={500}>
-      <Popup>You are here. This uses the phone GPS and needs a location permission. It is not a full offline trail map.</Popup>
+      <Popup>You are here. Phone GPS works without mobile signal once the offline map is saved.</Popup>
     </Marker>
   );
 }
@@ -72,16 +78,34 @@ function LocateUser({ enabled }: { enabled: boolean }) {
 export default function TrailMap() {
   const [trail, setTrail] = useState<GeoJsonObject | null>(null);
   const [tracking, setTracking] = useState(false);
+  const [offline, setOffline] = useState<OfflineStatus | null>(null);
+  const [prep, setPrep] = useState<PrepareProgress | null>(null);
+  const [prepError, setPrepError] = useState<string | null>(null);
   const pins = useMemo(() => overnightPins(), []);
   const start = getWaypoint("telegraph");
   const sonder = getWaypoint("sonder");
+  const ready = offline ? isOfflineReady(offline) : false;
 
   useEffect(() => {
+    setOffline(readOfflineStatus());
     fetch("/data/trail.geojson")
       .then((res) => res.json())
       .then(setTrail)
       .catch(() => setTrail(null));
   }, []);
+
+  async function saveOffline() {
+    setPrepError(null);
+    setPrep({ done: 0, total: 1, phase: "tiles" });
+    try {
+      const status = await prepareOfflineTiles(setPrep);
+      setOffline(status);
+    } catch (error) {
+      setPrepError(error instanceof Error ? error.message : "Could not save the offline map.");
+    } finally {
+      setPrep(null);
+    }
+  }
 
   return (
     <div className="map-shell">
@@ -89,21 +113,34 @@ export default function TrailMap() {
         <button type="button" className="btn" onClick={() => setTracking((value) => !value)}>
           {tracking ? "Stop GPS" : "Show my location"}
         </button>
+        <button type="button" className="btn ghost" onClick={saveOffline} disabled={Boolean(prep)}>
+          {prep
+            ? `Saving ${prep.done}/${prep.total}`
+            : ready
+              ? "Refresh offline map"
+              : "Save offline map"}
+        </button>
         <a className="btn ghost" href="/data/camps.gpx" download>
-          Download camp GPX
+          Camp GPX
         </a>
       </div>
+      {ready ? (
+        <p className="offline-flag">Offline map ready · {offline?.tileCount} tiles</p>
+      ) : null}
+      {prepError ? <p className="offline-flag offline-flag-warn">{prepError}</p> : null}
       <MapContainer
         center={[-23.68, 133.15]}
         zoom={9}
+        maxZoom={12}
         scrollWheelZoom
         style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
-          attribution="Tiles © Esri — trail © OpenStreetMap"
-          url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+          attribution='&copy; OpenStreetMap &copy; CARTO'
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+          subdomains={["a", "b", "c"]}
         />
-        {trail ? <GeoJSON data={trail} style={{ color: "#f0a05a", weight: 4, opacity: 0.95 }} /> : null}
+        {trail ? <GeoJSON data={trail} style={{ color: "#d46a2c", weight: 4, opacity: 0.95 }} /> : null}
         {start ? (
           <Marker position={[start.lat, start.lng]} icon={startIcon()}>
             <Popup>

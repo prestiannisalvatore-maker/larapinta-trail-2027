@@ -7,7 +7,7 @@ Walkers: Salvatore Prestianni (Perth) and James Saville (Brisbane).
 ## What is in the app
 
 - 20-day on-trail itinerary plus Alice Springs arrival and departure days
-- GPS map from OpenStreetMap relation 3066363
+- GPS map from OpenStreetMap relation 3066363, with Australind-style offline tile cache
 - Trip cost breakdown (flights, Alice beds, Parks fees, transfers, food drops, food)
 - Water tank table, food drops, transfers, flights and gear checklist
 

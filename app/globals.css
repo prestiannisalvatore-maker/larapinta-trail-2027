@@ -416,3 +416,23 @@ h3,
   color: #1a0c08;
   font-size: 13px;
 }
+
+.offline-flag {
+  position: absolute;
+  z-index: 500;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(20, 40, 28, 0.88);
+  color: #cfe6d6;
+  font-size: 12px;
+}
+
+.offline-flag-warn {
+  background: rgba(70, 28, 16, 0.9);
+  color: #ffc2a4;
+  bottom: 48px;
+}

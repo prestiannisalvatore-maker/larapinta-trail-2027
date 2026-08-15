@@ -15,16 +15,15 @@ export default function MapPage() {
   return (
     <main>
       <div className="wrap" style={{ paddingBottom: 8 }}>
-        <p className="kicker">Camps from 12 April 2027</p>
+        <p className="kicker">Same offline method as the Australind map</p>
         <h1 className="section-title" style={{ marginTop: 6 }}>
           Trail map
         </h1>
         <p className="small">
-          Numbered pins are each night’s camp or hotel. S is the Telegraph Station start. 12 on the
-          western end is the Mt Sonder summit. This is a planning map: it needs mobile data for the
-          satellite pictures. It can show your GPS position if you tap Show my location, but it is
-          not a reliable offline trail navigator. Download the camp GPX into Organic Maps, Gaia or
-          Avenza and carry the NT Parks paper maps.
+          On Wi-Fi, tap <strong>Save offline map</strong>. That stores the Larapinta corridor, camp
+          pins and the trail line on this phone, like the Australind app. After that,{" "}
+          <strong>Show my location</strong> follows you with GPS even when there is no mobile
+          signal. Add this site to your home screen before you leave Alice.
         </p>
       </div>
       <TrailMap />
