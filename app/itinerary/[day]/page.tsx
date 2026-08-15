@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import GradeBadge from "@/components/GradeBadge";
 import { days, getDay, getWaypoint } from "@/lib/data";
 import { dateForDay, formatLongDate } from "@/lib/dates";
+import ElevationProfile from "@/components/ElevationProfile";
+import { daySegments } from "@/lib/trail-geom";
 
 export function generateStaticParams() {
   return days.map((day) => ({ day: day.id }));
@@ -53,6 +55,20 @@ export default async function DayPage({ params }: { params: Promise<{ day: strin
             Camp / focus GPS: {point.lat.toFixed(5)}, {point.lng.toFixed(5)}
           </p>
         ) : null}
+        {daySegments.some((seg) => seg.id === day.id) ? (
+          <p className="small">
+            <Link href={`/map?day=${day.id}`}>See this day on the terrain map →</Link>
+          </p>
+        ) : null}
+      </article>
+
+      <h2 className="section-title">Elevation</h2>
+      <article className="card">
+        {daySegments.some((seg) => seg.id === day.id) ? (
+          <ElevationProfile dayId={day.id} />
+        ) : (
+          <p className="small">No walking this day — no elevation profile.</p>
+        )}
       </article>
 
       <h2 className="section-title">Highlights</h2>

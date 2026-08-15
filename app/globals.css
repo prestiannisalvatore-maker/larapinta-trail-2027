@@ -436,3 +436,93 @@ h3,
   color: #ffc2a4;
   bottom: 48px;
 }
+
+.elev-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 8px;
+}
+
+.day-chips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  padding: 2px 0 4px;
+  scrollbar-width: none;
+}
+
+.day-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.day-chip {
+  flex: 0 0 auto;
+  border: 1px solid #6a3d22;
+  background: rgba(20, 10, 6, 0.78);
+  color: var(--sand);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.day-chip.active {
+  background: var(--ochre);
+  color: #1a0c08;
+  border-color: var(--ochre);
+}
+
+.offline-inline {
+  margin: 0;
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(20, 40, 28, 0.88);
+  color: #cfe6d6;
+  font-size: 12px;
+}
+
+.offline-inline-warn {
+  background: rgba(70, 28, 16, 0.9);
+  color: #ffc2a4;
+}
+
+.map-elev {
+  position: absolute;
+  z-index: 500;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  background: rgba(20, 12, 8, 0.94);
+  border: 1px solid #5a3220;
+  border-radius: 14px;
+  padding: 10px 12px 8px;
+}
+
+.map-elev-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.map-elev .meta {
+  margin: 4px 0 0;
+  font-size: 12px;
+}
+
+.map-elev .elev-svg {
+  margin-top: 4px;
+}
+
+.map-shell .leaflet-control-attribution {
+  margin-bottom: 148px;
+  background: rgba(246, 234, 212, 0.8) !important;
+}
+
+.map-shell .leaflet-control-zoom {
+  margin-top: 118px;
+}

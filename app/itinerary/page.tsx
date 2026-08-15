@@ -1,7 +1,9 @@
 import Link from "next/link";
 import GradeBadge from "@/components/GradeBadge";
+import DayElevMeta from "@/components/DayElevMeta";
 import { days, trip } from "@/lib/data";
 import { dateForDay, formatShortDate } from "@/lib/dates";
+import { daySegments } from "@/lib/trail-geom";
 
 export default function ItineraryPage() {
   return (
@@ -31,6 +33,7 @@ export default function ItineraryPage() {
                 Sleep: {day.camp}
                 {day.km > 0 ? ` · ${day.km} km` : ` · ${day.hours}`}
               </div>
+              {daySegments.some((seg) => seg.id === day.id) ? <DayElevMeta dayId={day.id} /> : null}
             </div>
             <GradeBadge grade={day.grade} kind={day.kind} />
           </Link>

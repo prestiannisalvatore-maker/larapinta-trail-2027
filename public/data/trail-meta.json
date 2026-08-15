@@ -1,0 +1,200 @@
+{
+  "generatedAt": "2026-08-15T02:38:17.084Z",
+  "source": "OpenStreetMap hiking relations, member order, ODbL",
+  "totalKm": 222.96,
+  "vertices": 17448,
+  "sections": [
+    {
+      "id": 1,
+      "osmId": 3958653,
+      "name": "Larapinta Trail Section 1",
+      "km": 24.35,
+      "officialKm": 24.7,
+      "points": 1183,
+      "start": [
+        133.8850788,
+        -23.6709454
+      ],
+      "end": [
+        133.7180062,
+        -23.6787301
+      ]
+    },
+    {
+      "id": 2,
+      "osmId": 3958654,
+      "name": "Larapinta Trail Section 2",
+      "km": 25.76,
+      "officialKm": 26.2,
+      "points": 1454,
+      "start": [
+        133.7176687,
+        -23.678623
+      ],
+      "end": [
+        133.5387869,
+        -23.664054
+      ]
+    },
+    {
+      "id": 3,
+      "osmId": 3958656,
+      "name": "Larapinta Trail Section 3",
+      "km": 13.64,
+      "officialKm": 13.6,
+      "points": 1094,
+      "start": [
+        133.5387869,
+        -23.664054
+      ],
+      "end": [
+        133.4694626,
+        -23.7218965
+      ]
+    },
+    {
+      "id": 4,
+      "osmId": 3958657,
+      "name": "Larapinta Trail Section 4",
+      "km": 16.08,
+      "officialKm": 17.9,
+      "points": 1286,
+      "start": [
+        133.468599,
+        -23.7261282
+      ],
+      "end": [
+        133.3481562,
+        -23.7185171
+      ]
+    },
+    {
+      "id": 5,
+      "osmId": 3958658,
+      "name": "Larapinta Trail Section 5",
+      "km": 15.35,
+      "officialKm": 14.9,
+      "points": 1387,
+      "start": [
+        133.3481562,
+        -23.7185171
+      ],
+      "end": [
+        133.2593399,
+        -23.7025859
+      ]
+    },
+    {
+      "id": 6,
+      "osmId": 3958659,
+      "name": "Larapinta Trail Section 6",
+      "km": 29.37,
+      "officialKm": 28.9,
+      "points": 2744,
+      "start": [
+        133.2593399,
+        -23.7025859
+      ],
+      "end": [
+        133.0730526,
+        -23.7799527
+      ]
+    },
+    {
+      "id": 7,
+      "osmId": 3959484,
+      "name": "Larapinta Trail Section 7",
+      "km": 13.24,
+      "officialKm": 12.8,
+      "points": 1155,
+      "start": [
+        133.0726859,
+        -23.7798449
+      ],
+      "end": [
+        132.9791517,
+        -23.7593588
+      ]
+    },
+    {
+      "id": 8,
+      "osmId": 3959485,
+      "name": "Larapinta Trail Section 8",
+      "km": 12.98,
+      "officialKm": 13.8,
+      "points": 1103,
+      "start": [
+        132.9791517,
+        -23.7593588
+      ],
+      "end": [
+        132.9102716,
+        -23.7277051
+      ]
+    },
+    {
+      "id": 9,
+      "osmId": 3959486,
+      "name": "Larapinta Trail Section 9",
+      "km": 28.36,
+      "officialKm": 28.9,
+      "points": 2705,
+      "start": [
+        132.9101965,
+        -23.7271747
+      ],
+      "end": [
+        132.7258598,
+        -23.6319762
+      ]
+    },
+    {
+      "id": 10,
+      "osmId": 3959487,
+      "name": "Larapinta Trail Section 10",
+      "km": 9.09,
+      "officialKm": 8.9,
+      "points": 609,
+      "start": [
+        132.7273263,
+        -23.6317088
+      ],
+      "end": [
+        132.6783902,
+        -23.6579339
+      ]
+    },
+    {
+      "id": 11,
+      "osmId": 3959488,
+      "name": "Larapinta Trail Section 11",
+      "km": 26.4,
+      "officialKm": 26.3,
+      "points": 2020,
+      "start": [
+        132.6783902,
+        -23.6579339
+      ],
+      "end": [
+        132.5187757,
+        -23.5774963
+      ]
+    },
+    {
+      "id": 12,
+      "osmId": 3959489,
+      "name": "Larapinta Trail Section 12",
+      "km": 7.56,
+      "officialKm": 15.8,
+      "points": 641,
+      "start": [
+        132.5187757,
+        -23.5774963
+      ],
+      "end": [
+        132.5796883,
+        -23.5806423
+      ]
+    }
+  ]
+}

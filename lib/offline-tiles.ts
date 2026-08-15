@@ -1,8 +1,10 @@
-/** Prefetch CARTO raster tiles along the Larapinta corridor, same method as the Australind app. */
+import { flattenTrailCoords, type RouteCoord } from "@/lib/trail-geom";
 
-export const OFFLINE_CACHE = "larapinta-tiles-v1";
-export const SHELL_CACHE = "larapinta-shell-v1";
-export const STATUS_KEY = "larapinta-offline-status-v1";
+/** Prefetch OpenTopoMap terrain tiles along the Larapinta corridor. */
+
+export const OFFLINE_CACHE = "larapinta-tiles-v3";
+export const SHELL_CACHE = "larapinta-shell-v3";
+export const STATUS_KEY = "larapinta-offline-status-v3";
 
 const TRAIL_BOUNDS = {
   west: 132.38,
@@ -11,13 +13,11 @@ const TRAIL_BOUNDS = {
   north: -23.52,
 };
 
-const CARTO_HOSTS = [
-  "https://a.basemaps.cartocdn.com/light_all",
-  "https://b.basemaps.cartocdn.com/light_all",
-  "https://c.basemaps.cartocdn.com/light_all",
+const TOPO_HOSTS = [
+  "https://a.tile.opentopomap.org",
+  "https://b.tile.opentopomap.org",
+  "https://c.tile.opentopomap.org",
 ];
-
-export type RouteCoord = [number, number];
 
 export type OfflineStatus = {
   shellCached: boolean;
@@ -67,60 +67,33 @@ export function isOfflineReady(status: OfflineStatus) {
   return status.routeCached && status.tileCount > 80;
 }
 
-export function flattenTrailCoords(geojson: unknown): RouteCoord[] {
-  const coords: RouteCoord[] = [];
-
-  function walk(value: unknown) {
-    if (!value || typeof value !== "object") return;
-    const obj = value as { type?: string; coordinates?: unknown; features?: unknown[]; geometry?: unknown };
-    if (obj.type === "FeatureCollection" && Array.isArray(obj.features)) {
-      obj.features.forEach(walk);
-      return;
-    }
-    if (obj.type === "Feature") {
-      walk(obj.geometry);
-      return;
-    }
-    if (obj.type === "LineString" && Array.isArray(obj.coordinates)) {
-      for (const pair of obj.coordinates as number[][]) {
-        if (pair.length >= 2) coords.push([pair[0], pair[1]]);
-      }
-      return;
-    }
-    if (obj.type === "MultiLineString" && Array.isArray(obj.coordinates)) {
-      for (const line of obj.coordinates as number[][][]) {
-        for (const pair of line) {
-          if (pair.length >= 2) coords.push([pair[0], pair[1]]);
-        }
-      }
-    }
-  }
-
-  walk(geojson);
-  return coords;
-}
-
-function thinCoords(coords: RouteCoord[], everyKmApprox = 4): RouteCoord[] {
+function thinCoords(coords: RouteCoord[], everyM: number): RouteCoord[] {
   if (coords.length < 2) return coords;
   const out: RouteCoord[] = [coords[0]];
-  let last = coords[0];
-  const stepDeg = everyKmApprox / 111;
-  for (const point of coords) {
-    if (Math.abs(point[1] - last[1]) + Math.abs(point[0] - last[0]) >= stepDeg) {
-      out.push(point);
-      last = point;
+  let acc = 0;
+  for (let i = 1; i < coords.length; i++) {
+    acc += Math.hypot(
+      (coords[i][0] - coords[i - 1][0]) * 111320 * Math.cos((coords[i][1] * Math.PI) / 180),
+      (coords[i][1] - coords[i - 1][1]) * 110540,
+    );
+    if (acc >= everyM) {
+      out.push(coords[i]);
+      acc = 0;
     }
   }
   out.push(coords[coords.length - 1]);
   return out;
 }
 
-function tilesAlongCorridor(coords: RouteCoord[], zMin: number, zMax: number, pad = 1) {
+function tilesAlongCorridor(coords: RouteCoord[], zMin: number, zMax: number) {
   const set = new Set<string>();
-  const thinned = thinCoords(coords);
   const tiles: Array<{ z: number; x: number; y: number }> = [];
 
   for (let z = zMin; z <= zMax; z++) {
+    const pad = z >= 15 ? 1 : z >= 13 ? 1 : 1;
+    const sampleM = z >= 15 ? 220 : z >= 13 ? 500 : 4000;
+    const thinned = z <= 6 ? coords.slice(0, 1) : thinCoords(coords, sampleM);
+
     if (z <= 6) {
       const x0 = clampTile(lon2tile(TRAIL_BOUNDS.west, z) - pad, z);
       const x1 = clampTile(lon2tile(TRAIL_BOUNDS.east, z) + pad, z);
@@ -177,10 +150,10 @@ export async function prepareOfflineTiles(onProgress?: (progress: PrepareProgres
   if (coords.length < 10) throw new Error("Trail GPS is missing.");
 
   const cache = await caches.open(OFFLINE_CACHE);
-  const urls = new Set<string>(["/data/trail.geojson", "/data/camps.gpx"]);
+  const urls = new Set<string>(["/data/trail.geojson", "/data/trail.gpx", "/data/camps.gpx", "/data/elevation.json"]);
 
-  for (const tile of tilesAlongCorridor(coords, 5, 12, 1)) {
-    const host = CARTO_HOSTS[(tile.x + tile.y) % CARTO_HOSTS.length];
+  for (const tile of tilesAlongCorridor(coords, 5, 15)) {
+    const host = TOPO_HOSTS[(tile.x + tile.y) % TOPO_HOSTS.length];
     urls.add(`${host}/${tile.z}/${tile.x}/${tile.y}.png`);
   }
 
@@ -196,8 +169,9 @@ export async function prepareOfflineTiles(onProgress?: (progress: PrepareProgres
       try {
         const existing = await cache.match(url);
         if (!existing) {
-          const res = await fetch(url, { mode: "cors", credentials: "omit" });
-          if (res.ok) await cache.put(url, res.clone());
+          const isTile = url.includes("tile.opentopomap.org");
+          const res = await fetch(url, { mode: isTile ? "no-cors" : "cors", credentials: "omit" });
+          if (res.ok || res.type === "opaque") await cache.put(url, res.clone());
         }
       } catch {
         /* keep going — a few missed tiles are fine */

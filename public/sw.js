@@ -1,6 +1,6 @@
-/* Larapinta Trail — app shell + CARTO tiles, same pattern as Australind */
-const SHELL = "larapinta-shell-v1";
-const TILES = "larapinta-tiles-v1";
+/* Larapinta Trail — app shell + OpenTopoMap terrain tiles */
+const SHELL = "larapinta-shell-v3";
+const TILES = "larapinta-tiles-v3";
 
 const PRECACHE = ["/", "/map", "/itinerary", "/costs", "/gear", "/logistics", "/manifest.json"];
 
@@ -30,7 +30,7 @@ self.addEventListener("activate", (event) => {
 });
 
 function isTileRequest(url) {
-  return url.hostname.includes("basemaps.cartocdn.com");
+  return url.hostname.includes("tile.opentopomap.org") || url.hostname.includes("basemaps.cartocdn.com");
 }
 
 self.addEventListener("fetch", (event) => {

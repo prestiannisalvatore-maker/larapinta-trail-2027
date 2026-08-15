@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "trail": "node scripts/build-trail.mjs",
+    "elevation": "node scripts/build-elevation.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

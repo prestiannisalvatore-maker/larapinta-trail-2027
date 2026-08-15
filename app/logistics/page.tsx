@@ -119,9 +119,9 @@ export default function LogisticsPage() {
           ))}
         </ul>
         <p className="small">
-          Distances and grades follow NT Parks. GPS alignment is OpenStreetMap relation 3066363,
-          licensed ODbL. Fees and commercial package prices are 2026 figures and must be rechecked
-          before you pay.
+          Distances and grades follow NT Parks. The walking line is OpenStreetMap’s 12 section
+          relations in order (parent 3066363, ODbL), not a stitched guess. Phone GPS is typically
+          3–10 m, worse in gorges — use the accuracy ring, and keep the paper maps.
         </p>
       </article>
     </main>
